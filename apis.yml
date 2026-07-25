@@ -1,8 +1,27 @@
 aid: commonground
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/commonground.png
 name: CommonGround
-description: 'CommonGround is a company surfaced as a portfolio company of matrix-partners and added to
-  the API Evangelist network as a stub for enrichment. Sector: ai. This profile is a lead awaiting the
-  enrichment pipeline.'
+description: 'CommonGround is an early-stage (seed) AI company listed in the Matrix Partners portfolio
+  and added to the API Evangelist network as a portfolio-derived lead. As of the 2026-07-20 enrichment
+  pass the company has no reachable public web presence: the URL Matrix publishes for it
+  (https://www.commonground-ai.com/) has no A record and serves no site, and WHOIS shows that domain is
+  registered to Apple Inc. through the Com Laude corporate registrar rather than to CommonGround. The
+  adjacent domains commonground.ai and commongroundai.com are parked for sale on Afternic, and
+  getcommonground.com resolves only to a registrar lander. No developer portal, documentation, OpenAPI
+  or other machine-readable API artifact, GitHub organization, or published client library could be
+  located. This profile is retained as an identity-only stub and should be re-checked if the company
+  establishes a public presence.'
 url: https://raw.githubusercontent.com/api-evangelist/commonground/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,12 +29,59 @@ x-backed-by:
 - matrix-partners
 x-tier: stub
 x-tier-reason: portfolio-lead
+x-status: unreachable
+x-verification:
+  date: '2026-07-20'
+  method: probed
+  summary: No reachable web presence, no API surface, no developer artifacts found.
+  checks:
+  - target: https://www.commonground-ai.com/
+    result: no-dns
+    detail: 'No A or CNAME record on commonground-ai.com or www.commonground-ai.com; NS delegated to
+      Com Laude (nsgbr.comlaude.co.uk, nssui.comlaude.ch, nsusa.comlaude.net). No MX, TXT/SPF, DMARC,
+      CAA or DS records.'
+  - target: whois commonground-ai.com
+    result: third-party-owned
+    detail: 'Registrant Organization: Apple Inc. Registrar: Nom-iq Ltd. dba Com Laude. Created
+      2020-01-25, registry expiry 2035-01-25. This domain is not controlled by CommonGround.'
+  - target: https://commonground.ai/
+    result: parked
+    detail: HTTP 307 redirect to forsale.godaddy.com; Afternic nameservers. Domain listed for sale.
+  - target: https://commongroundai.com/
+    result: parked
+    detail: Afternic nameservers, same parking IPs as commonground.ai.
+  - target: https://getcommonground.com/
+    result: parked
+    detail: 'HTTP 200 but body is a registrar lander redirect (window.location.href="/lander"); not a
+      company site.'
+  - target: https://matrix.vc/ portfolio
+    result: found
+    detail: Matrix portfolio lists CommonGround, sector AI, linking https://www.commonground-ai.com/.
+  - target: GitHub organizations commonground-ai, commonground, commongroundai
+    result: not-found
+    detail: All three return 404 from api.github.com/orgs.
+  - target: npm registry search "commonground-ai"
+    result: none
+    detail: HTTP 200, no first-party packages in results.
+  - target: 0-working/probe-domain-security.py
+    result: unreachable
+  - target: 0-working/probe-security-programs.py
+    result: vdp=none trust=none
+  - target: 0-working/derive-authentication.py
+    result: no specs in repo
+  - target: 0-working/derive-oauth-scopes.py
+    result: no oauth2 schemes
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-- Ai
+- Artificial Intelligence
+- Startup
+- Venture Backed
+- Matrix Partners
+- Seed Stage
+- Stub
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -24,4 +90,11 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://commonground-ai.com
+  url: https://www.commonground-ai.com/
+  x-status: unreachable
+  x-checked: '2026-07-20'
+x-enrichment:
+  date: '2026-07-20'
+  status: nochange
+  artifacts_added: 0
+  pass: local-v1
