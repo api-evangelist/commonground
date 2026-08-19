@@ -71,7 +71,7 @@ x-verification:
     result: no specs in repo
   - target: 0-working/derive-oauth-scopes.py
     result: no oauth2 schemes
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-20'
 tags:
